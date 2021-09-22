@@ -1,27 +1,48 @@
+import hashlib
 from block import Block
-import time
 
 class Blockchain():
     def __init__(self):
-        self.genesis = self.create_genesis()
+        self.difficulty = 4
+        self.genesis = None
+        self.create_genesis()
         self.head = self.genesis
 
     def create_genesis(self):
-        return Block("Genesis")
+        self.genesis = Block(0, "Genesis")
+        self.proof_of_work(self.genesis)
     
-    def add_block(self, data):
-        new_block = Block(data)
+    def mine_block(self, data):
+        num = self.head.num + 1
+        prev_hash = self.head.hash
+        new_block = Block(num, data, prev_hash)
 
-        new_block.prev_hash = self.head.hash
-        new_block.num = self.head.num + 1
-
-        self.head.next = new_block
+        
         new_block.prev = self.head
+        self.proof_of_work(new_block)
+        self.head.next = new_block
 
         self.head = new_block
     
-    def mine(self):
-        pass
+    def proof_of_work(self, block:Block):
+        while self.valid_proof(block) is False:
+            block.nonce += 1
+        block.update_hash()
+        
+    
+    def find_guess_hash(self, block:Block):
+        if (self.genesis == None or self.genesis == block):
+            guess = f"0g3N3s1Sbl0ck{block.nonce}".encode()
+            guess_hash = hashlib.sha256(guess).hexdigest()
+        else:
+            prev_nonce = block.prev.nonce
+            prev_hash = block.prev.hash
+            guess = f"{prev_nonce}{prev_hash}{block.nonce}".encode()
+            guess_hash = hashlib.sha256(guess).hexdigest()
+        return guess_hash
+
+    def valid_proof(self, block:Block):
+        return self.find_guess_hash(block)[:self.difficulty]=="0" * self.difficulty
     
     def print(self):
         temp = self.genesis
@@ -29,12 +50,13 @@ class Blockchain():
             print(temp)
             temp = temp.next
 
-# Test
-b = Blockchain()
-time.sleep(2)
-b.add_block("This is Block 1")
-time.sleep(2)
-b.add_block("This is Block 2")
-time.sleep(2)
-b.add_block("This is Block 3")
-b.print()
+if __name__ == '__main__':
+
+    # Test
+
+    b = Blockchain()
+
+    print(b.head)
+    for i in range(10):
+        b.mine_block("This is Block " + str(i))
+        print(b.head)
