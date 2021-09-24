@@ -5,6 +5,7 @@ s = Shop()
 
 q = False
 while(not q):
+
     print('\n--------------------------------')
     print('Hi Dexter!!... What do you want to do ?')
     print('add transaction (a) | mine a block (m) | show the blockchain (b) | show unverified transactions (ut) | quit (q)')
@@ -12,14 +13,16 @@ while(not q):
     print('--------------------------------\n')
 
     if (action == 'a'): # add transaction
-        while True: #input customer name
+       #input customer name
+        while True:
             customer = input('Name of the customer: ')
             try:
                 temp = float(customer)
                 print('Customer name can not be a number')
             except ValueError:
                 break
-        while True: # input amount paid
+        # input amount paid
+        while True:
             try:
                 amount = float(input('Amount paid: '))
                 if(amount > 0):
@@ -29,14 +32,16 @@ while(not q):
             except ValueError:
                 print('Amount should be a number')
                 continue
-        while True: # input item name
+        # input item name
+        while True:
             item = input('Name of the item: ')
             try:
                 temp = float(item)
                 print('Item name can not be a number')
             except ValueError:
                 break
-        while True: # input quantity
+        # input quantity
+        while True:
             try:
                 quantity = int(input('Quantity: '))
                 if(quantity > 0):
