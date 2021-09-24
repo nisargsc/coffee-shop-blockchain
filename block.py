@@ -3,7 +3,7 @@ import datetime
 import json
 
 class Block():
-    def __init__(self, num:int, data:str, prev_hash=None):
+    def __init__(self, num:int, data, prev_hash=None):
         self.num = num
         self.nonce = 0
         self.data = data
@@ -33,8 +33,12 @@ class Block():
            }
            return block_dict
 
+    def json(self):
+        block_json = json.dumps(self.dict(), indent = 4)
+        return block_json
+
     def __str__(self):
-        return str(json.dumps(self.dict(), indent = 4))
+        return str(self.json())
         # return f"\n \
         # num : {self.num} \n \
         # timestamp : {self.timestamp} \n \

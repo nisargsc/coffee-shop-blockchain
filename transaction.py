@@ -3,7 +3,7 @@ import json
 
 
 class Transaction():
-    def __init__(self, customer:str, amount_paid:int, item:str, quantity:int):
+    def __init__(self, customer:str, amount_paid:float, item:str, quantity:int):
         self.customer = customer
         self.amount_paid = amount_paid
         self.item = item
@@ -20,8 +20,12 @@ class Transaction():
         }
         return transaction_dict
 
+    def json(self):
+        transaction_json = json.dumps(self.dict(), indent=4)
+        return transaction_json
+        
     def __str__(self):
-        return str(json.dumps(self.dict(), indent=4))
+        return str(self.json())
         # return f"\n \
         # timestamp : {self.timestamp} \n \
         # customer : {self.customer} \n \

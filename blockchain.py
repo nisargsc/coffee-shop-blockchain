@@ -23,6 +23,8 @@ class Blockchain():
         self.head.next = new_block
 
         self.head = new_block
+
+        return new_block.dict()
     
     def proof_of_work(self, block:Block):
         while self.valid_proof(block) is False:
