@@ -30,22 +30,22 @@ class Block():
         :return: None
         """
         self.num = num
+        self.timestamp = datetime.datetime.now()
         self.nonce = 0
         self.data = data
         self.prev_hash = prev_hash
         self.hash = self.find_hash()
         self.next = None
         self.prev = None
-        self.timestamp = datetime.datetime.now()
 
     def find_hash(self):
         """
-        Finds the hash of the current block using num, data, prev_hash and nonce
+        Finds the hash of the current block using num, timestamp, data, prev_hash and nonce
 
         :return: <str> hash of the current block
         """
         hash = hashlib.sha256()
-        block_string = f"{self.num}{self.data}{self.prev_hash}{self.nonce}"
+        block_string = f"{self.num}{str(self.timestamp)}{self.data}{self.prev_hash}{self.nonce}"
         hash.update(block_string.encode('utf-8'))
         return hash.hexdigest()
 
