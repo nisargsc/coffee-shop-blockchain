@@ -15,6 +15,7 @@ class Shop():
     :method add_transaction(): Adds new transactions to unverified_transactions list
     :method mine_transactions(): Mines all the transactions from the unverified_transactions list into a block
     :method register_nodes(): Add a new node to the set of nodes for decentralised implementation
+    :method resolve_conflicts(): Consensus algoritm. Resolves conflicts by replacing the chain with longest valid chain in the network.
     """
     def __init__(self):
         """
