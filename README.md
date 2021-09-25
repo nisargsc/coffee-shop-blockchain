@@ -13,6 +13,10 @@ pip install Flask
 pip install requests
 ```
 To test the decentralised implementation you might need a HTTP client like [postman](https://www.postman.com/).
+Run the following command in terminal to run a flask server . You can change the port number to run multiple nodes on seperate terminals. Make sure that you are in the project directory before runing the following.
+```
+flask run -p 5000
+```
 
 ## Code Structure
 This project is divided in 7 python files i.e. `block.py`, `blockchain.py`, `shop.py`, `transaction.py`, `main.py`, `app.py`, and `test.py`. Of this 7 files first 4 files have `Block`, `Blockchain`, `Shop`, `Transaction` classes respectivily. `main.py` is local implementation, a terminal based interface to interact with the blockchain. `test.py` is just a test file that creates few transactions and mines them to blockchain. `app.py` is the decentralised implementation, it is a flask api which can be used to interact with the blockchain.
