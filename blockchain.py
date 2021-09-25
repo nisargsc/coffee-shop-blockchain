@@ -15,6 +15,9 @@ class Blockchain():
     :method proof_of_work(): Updates the nonce and hash of the block according to the proof of work algoritm
     :method find_guess_hash(): Finds hash for the guesss to be used in proof of work algoritm
     :method valid_proof(): Checks if the block has valid proof or not
+    :method varify_blocks(): Varifies if given two block_dict form valid blockchain or not.
+    :method valid_chain(): Determines if a given blockchain <list> is valid
+    :method update_chain(): Updates the blockchain with new given blockchain <list>
     :method print(): Prints the blockchain
     """
 
@@ -101,7 +104,7 @@ class Blockchain():
 
     def varify_blocks(self, prev_block:dict, block:dict):
         """
-        Varifies if given to block_dict form valid blockchain or not.
+        Varifies if given two block_dict form valid blockchain or not.
         To be used for consensus in decentralised implementation
 
         :param prev_block: <block_dict>
